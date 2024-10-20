@@ -6,6 +6,7 @@ package com.keyin.aircraft;
 import com.keyin.airport.Airport;
 import com.keyin.passenger.Passenger;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Flight {
             initialValue = 1
     )
     @GeneratedValue(
-            genertator = "flight_sequence"
+            generator = "flight_sequence"
     )
     private Long id;
 
@@ -32,8 +33,8 @@ public class Flight {
     @JoinColumn(name = "departure_airport_id")
     private Airport departureAirport;
 
-    private localDateTime departureTime;
-    private localDateTime arrivalTime;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
 
     @ManyToMany (mappedBy = "flights")
     private List<Passenger> passengers;
@@ -63,20 +64,28 @@ public class Flight {
         this.departureAirport = departureAirport;
     }
 
-    public localDateTime getDepartureTime() {
+    public LocalDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(localDateTime departureTime) {
+    public void setDepartureTime(LocalDateTime departureTime) {
         this.departureTime = departureTime;
     }
 
-    public localDateTime getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(localDateTime arrivalTime) {
+    public void setArrivalTime(LocalDateTime arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public Airport getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public void setArrivalAirport(Airport arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
     }
 
     public List<Passenger> getPassengers() {
