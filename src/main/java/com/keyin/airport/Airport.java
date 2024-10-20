@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 public class Airport {
-    @id
+    @Id
     @SequenceGenerator(
             name = "airport_sequence",
             sequenceName = "airport_sequence",

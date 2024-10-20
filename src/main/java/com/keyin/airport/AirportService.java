@@ -21,6 +21,10 @@ public class AirportService {
         Optional<Airport> airportOptional = airportRepository.findById(id);
         return airportOptional.orElse(null);
     }
+    // Add airport
+    public Airport addAirport(Airport newAirport) {
+        return airportRepository.save(newAirport);
+    }
 
     // update an existing airport
     public Airport updateAirport(Long id, Airport updatedAirport) {
@@ -40,6 +44,7 @@ public class AirportService {
     public void deleteAirport(Long id) {
         airportRepository.deleteById(id);
     }
+
 
 
 }
