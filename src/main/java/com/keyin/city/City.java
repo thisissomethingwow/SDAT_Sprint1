@@ -1,4 +1,4 @@
-package com.keyin.cities;
+package com.keyin.city;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,10 +6,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
-public class Cities {
+public class City {
     @Id
-    @SequenceGenerator(name = "division_sequence", sequenceName = "division_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "division_sequence")
+    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1, initialValue=1)
+    @GeneratedValue(generator = "city_sequence")
     private long id;
 
     private String name;
@@ -50,17 +50,16 @@ public class Cities {
         this.population = population;
     }
 
-    public Cities() {
-    }
 
-    public Cities(long id, String name, String province, int population) {
+
+    public City(long id, String name, String province, int population) {
         this.id = id;
         this.name = name;
         this.province = province;
         this.population = population;
     }
 
-    public Cities(String name, String province, int population) {
+    public City(String name, String province, int population) {
         this.name = name;
         this.province = province;
         this.population = population;
