@@ -19,7 +19,7 @@ public class FlightService {
     }
 
     // Get flight by id
-    public Flight findFlightById(Long id) {
+    public Flight getFlightById(Long id) {
         return flightRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class FlightService {
     }
 
     // update a flight
-    public Flight updateFlight(Long id, updatedFlight) {
+    public Flight updateFlight(Long id,Flight updatedFlight) {
 
             Optional<Flight> flightToUpdateOptional = flightRepository.findById(id);
 
