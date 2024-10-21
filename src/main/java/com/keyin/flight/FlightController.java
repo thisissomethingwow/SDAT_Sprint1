@@ -1,6 +1,7 @@
 package com.keyin.flight;
 
 
+import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,17 @@ public class FlightController {
     @GetMapping
     public List<Flight> getAllFlights(){
         return flightService.findAllFlights();
+    }
+
+    // get airports used by a specific passenger
+    @GetMapping("/passenger/{id}/airports")
+    public ResponseEntity<List<Airport>> getAirportsUsedByPassenger(@PathVariable Long id) {
+        List<Airport> airports = flightService.getAirportsUsedByPassenger(id);
+        if (airports.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(airports, HttpStatus.OK);
+        }
     }
 
     // get flight by id
