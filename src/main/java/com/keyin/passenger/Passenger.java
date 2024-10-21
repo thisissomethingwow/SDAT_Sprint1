@@ -1,5 +1,6 @@
 package com.keyin.passenger;
 
+import com.keyin.airport.Airport;
 import com.keyin.city.City;
 import com.keyin.flight.Flight;
 import jakarta.persistence.*;
@@ -38,6 +39,11 @@ public class Passenger {
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "flight_id")
     )
+
+
+
+
+
     private List<Flight> flights;
 
     // Getters and Setters

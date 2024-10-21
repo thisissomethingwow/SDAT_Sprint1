@@ -1,8 +1,9 @@
 package com.keyin.flight;
 
-package com.keyin.aircraft;
 
 
+
+import com.keyin.aircraft.Aircraft;
 import com.keyin.airport.Airport;
 import com.keyin.passenger.Passenger;
 import jakarta.persistence.*;
@@ -33,11 +34,21 @@ public class Flight {
     @JoinColumn(name = "departure_airport_id")
     private Airport departureAirport;
 
+    @ManyToOne
+    @JoinColumn(name = "arrival_airport_id", nullable = false)
+    private Airport arrivalAirport;
+
+    private int numberOfPassengers;
+
+
+
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
 
     @ManyToMany (mappedBy = "flights")
     private List<Passenger> passengers;
+
+
 
     // Getters and Setters
     public Long getId() {
@@ -94,5 +105,13 @@ public class Flight {
 
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
+    }
+
+    public int getNumberOfPassengers() {
+        return numberOfPassengers;
+    }
+
+    public void setNumberOfPassengers(int numberOfPassengers) {
+        this.numberOfPassengers = numberOfPassengers;
     }
 }
