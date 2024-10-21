@@ -1,11 +1,11 @@
 package com.keyin.flight;
 
 
+import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FlightService {
@@ -48,9 +48,23 @@ public class FlightService {
             }
             return null; // return null if not found
         }
-        // Delete flight by ID
-        public void deleteFlight(Long id) {
+    // Delete flight by ID
+
+    public void deleteFlight(Long id) {
             flightRepository.deleteById(id);
         }
+    // Get airports used by a specific passenger
+    public List<Airport> getAirportsUsedByPassenger(Long passengerId) {
+        List<Airport> departureAirports = flightRepository.findDepartureAirportsByPassenger(passengerId);
+        List<Airport> arrivalAirports = flightRepository.findArrivalAirportsByPassenger(passengerId);
 
-}
+        Set<Airport> uniqueAirports = new HashSet<>();
+        uniqueAirports.addAll(departureAirports);
+        uniqueAirports.addAll(arrivalAirports);
+
+        return new ArrayList<>(uniqueAirports);
+    }
+
+
+
+    }
