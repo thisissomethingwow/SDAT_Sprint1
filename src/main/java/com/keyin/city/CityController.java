@@ -14,29 +14,30 @@ public class CityController {
     @Autowired
     public CityServices cityServices;
 
-    @GetMapping("/getAllCity")
+    @GetMapping
     public ResponseEntity<String> getAllCity(){
         cityServices.getAllCity();
         return new ResponseEntity<>("Fetched Cities",HttpStatus.OK);
     }
 
-    @GetMapping("/getAllCityById{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<String> getAllCity(Long id){
         cityServices.getAllCityById(id);
         return new ResponseEntity<>("Fetched Cities",HttpStatus.OK);
     }
 
-    @PostMapping("/addCity")
+    @PostMapping
     public City addCity(@RequestBody City city){
         return cityServices.addCity(city);
     }
 
-    @PutMapping("/updateCity/{id}")
+    //update by id
+    @PutMapping("/{id}")
     public ResponseEntity<City> updateCity(@PathVariable long id,@RequestBody City city){
         return ResponseEntity.ok((cityServices.updateCity(id,city)));
     }
-
-    @DeleteMapping("/deleteCity/{id}")
+    // delete by id
+    @DeleteMapping("/{id}")
     public void deleteCity(@PathVariable long id){
         cityServices.deleteCityById(id);
     }
