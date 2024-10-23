@@ -83,5 +83,8 @@ public class Airport {
     public void setArrivals(List<Flight> arrivals) {
         this.arrivals = arrivals;
     }
+
+
+
 }
 

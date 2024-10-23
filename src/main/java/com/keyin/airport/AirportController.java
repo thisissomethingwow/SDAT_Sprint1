@@ -17,6 +17,17 @@ public class AirportController {
 
     @Autowired
     private AirportService airportService;
+    private Airport airportRepository;
+
+    // Get airports by city ID
+    @GetMapping("/{cityId}/airports")
+    public ResponseEntity<List<Airport>> getAirportsByCity(@PathVariable Long cityId) {
+        List<Airport> airports = airportService.findByCityId(cityId);  // Use airportService here
+        if (airports.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Return 404 if no airports found
+        }
+        return new ResponseEntity<>(airports, HttpStatus.OK);  // Return 200 OK with the list of airports
+    }
 
     // Get all airports
     @GetMapping
@@ -72,4 +83,5 @@ public class AirportController {
         airportService.deleteAirport(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
