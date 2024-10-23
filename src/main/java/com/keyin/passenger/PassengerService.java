@@ -1,10 +1,14 @@
 package com.keyin.passenger;
 
+import com.keyin.aircraft.Aircraft;
+import com.keyin.flight.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import  java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PassengerService {
@@ -47,5 +51,19 @@ public class PassengerService {
     // Delete a passenger by ID
     public void deletePassenger(Long id) {
         passengerRepository.deleteById(id);
+    }
+
+
+    public List<Aircraft> getAircraftByPassenger(Long passengerId) {
+        Optional<Passenger> passengerOptional = passengerRepository.findById(passengerId);
+        if (passengerOptional.isPresent()) {
+            Passenger passenger = passengerOptional.get();
+            List<Flight> flights = passenger.getFlights();  // Get the flights associated with this passenger
+            return flights.stream()
+                    .map(Flight::getAircraft)  // Map flights to their aircraft
+                    .distinct()  // Avoid duplicates if necessary
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();  // Return an empty list if no passenger is found
     }
 }
