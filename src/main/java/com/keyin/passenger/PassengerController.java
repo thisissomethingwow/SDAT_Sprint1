@@ -1,5 +1,6 @@
 package com.keyin.passenger;
 
+import com.keyin.aircraft.Aircraft;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +52,14 @@ public class PassengerController {
     @DeleteMapping("/passengers/{id}")
     public void deletePassenger(@PathVariable Long id) {
         passengerService.deletePassenger(id);
+    }
+
+    @GetMapping("/passengers/{id}/aircraft")
+    public ResponseEntity<List<Aircraft>> getAircraftByPassenger(@PathVariable Long id) {
+        List<Aircraft> aircraftList = passengerService.getAircraftByPassenger(id);
+        if (aircraftList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Return 404 if no aircraft found
+        }
+        return new ResponseEntity<>(aircraftList, HttpStatus.OK);  // Return the list of aircraft
     }
 }
