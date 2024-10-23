@@ -1,9 +1,10 @@
 package com.keyin.airport;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-@Repository
-public interface AirportRepository extends CrudRepository<Airport, Long> {
+public interface AirportRepository extends JpaRepository<Airport, Long> {
 
+    // Method to find airports by city ID
+    List<Airport> findByCityId(Long cityId);
 }

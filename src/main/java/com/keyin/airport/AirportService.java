@@ -44,6 +44,10 @@ public class AirportService {
     public void deleteAirport(Long id) {
         airportRepository.deleteById(id);
     }
+    // Method to find airports by city ID
+    public List<Airport> findByCityId(Long cityId) {
+        return airportRepository.findByCityId(cityId);
+    }
 
 
 
