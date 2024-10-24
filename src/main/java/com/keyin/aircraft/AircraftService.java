@@ -30,6 +30,7 @@ public class AircraftService {
             Aircraft aircraftToUpdate = aircraftToUpdateOptional.get();
             aircraftToUpdate.setModel(updatedAircraft.getModel());
             aircraftToUpdate.setCapacity(updatedAircraft.getCapacity());
+            aircraftToUpdate.setAirlineName(updatedAircraft.getAirlineName());
             return aircraftRepository.save(aircraftToUpdate);
         }
         return null;

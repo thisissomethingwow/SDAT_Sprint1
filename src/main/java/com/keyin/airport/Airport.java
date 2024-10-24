@@ -33,6 +33,23 @@ public class Airport {
     @OneToMany(mappedBy = "arrivalAirport")
     private List<Flight> arrivals;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "airport_aircraft_type",
+            joinColumns = @JoinColumn(name = "airport_id")
+    )
+    @Column(name = "aircraft_type")
+    private List<String> supportedAircraftTypes;
+
+    // Add getter and setter
+    public List<String> getSupportedAircraftTypes() {
+        return supportedAircraftTypes;
+    }
+
+    public void setSupportedAircraftTypes(List<String> supportedAircraftTypes) {
+        this.supportedAircraftTypes = supportedAircraftTypes;
+    }
+
     // Getters and Setters
 
 
