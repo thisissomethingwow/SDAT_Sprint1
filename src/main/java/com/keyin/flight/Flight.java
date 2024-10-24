@@ -3,6 +3,8 @@ package com.keyin.flight;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airport.Airport;
 import com.keyin.passenger.Passenger;
@@ -46,6 +48,7 @@ public class Flight {
     private LocalDateTime arrivalTime;
 
     @ManyToMany (mappedBy = "flights")
+    @JsonIgnore
     private List<Passenger> passengers;
 
 

@@ -1,5 +1,6 @@
 package com.keyin.aircraft;
 
+import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +58,13 @@ public class AircraftController {
         }
         aircraftService.deleteAircraft(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/{aircraftId}/airports")
+    public ResponseEntity<List<Airport>> getAuthorizedAirports(@PathVariable Long aircraftId) {
+        List<Airport> authorizedAirports = aircraftService.findAuthorizedAirports(aircraftId);
+        if (authorizedAirports.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(authorizedAirports, HttpStatus.OK);
     }
 }

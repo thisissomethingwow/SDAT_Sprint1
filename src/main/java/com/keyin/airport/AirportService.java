@@ -37,6 +37,8 @@ public class AirportService {
             airportToUpdate.setCode(updatedAirport.getCode());
             airportToUpdate.setCity(updatedAirport.getCity());
 
+            airportToUpdate.setSupportedAircraftTypes(updatedAirport.getSupportedAircraftTypes());
+
             return airportRepository.save(airportToUpdate);
         }
         return null;
