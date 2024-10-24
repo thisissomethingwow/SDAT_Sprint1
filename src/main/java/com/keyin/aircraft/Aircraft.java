@@ -20,6 +20,8 @@ public class Aircraft {
 
     private String model;
     private int capacity;
+    @Column(name = "airline_name")
+    private String airlineName;
 
     // Getters and Setters
     public Long getId() {
@@ -44,5 +46,13 @@ public class Aircraft {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public String getAirlineName() {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
     }
 }
