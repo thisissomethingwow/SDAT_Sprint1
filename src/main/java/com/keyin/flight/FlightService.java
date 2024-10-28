@@ -1,6 +1,7 @@
 package com.keyin.flight;
 
 
+import com.keyin.aircraft.Aircraft;
 import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,10 @@ public class FlightService {
         uniqueAirports.addAll(arrivalAirports);
 
         return new ArrayList<>(uniqueAirports);
+    }
+    // Get aircraft used by a specific passenger
+    public List<Aircraft> getAircraftByPassenger(Long passengerId) {
+        return flightRepository.findAircraftByPassengerId(passengerId);
     }
 
 
