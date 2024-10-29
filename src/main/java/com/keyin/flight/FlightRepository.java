@@ -18,7 +18,7 @@ import java.util.List;
     @Query("SELECT DISTINCT f.arrivalAirport FROM Flight f JOIN f.passengers p WHERE p.id = :passengerId")
     List<Airport> findArrivalAirportsByPassenger(@Param("passengerId") Long passengerId);
 
-    // In FlightRepository.java
+
     @Query("SELECT DISTINCT f.aircraft FROM Flight f JOIN f.passengers p WHERE p.id = :passengerId")
     List<Aircraft> findAircraftByPassengerId(@Param("passengerId") Long passengerId);
 
