@@ -6,6 +6,7 @@ package com.keyin.flight;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
+import com.keyin.airline.Airline;
 import com.keyin.airport.Airport;
 import com.keyin.passenger.Passenger;
 import jakarta.persistence.*;
@@ -41,6 +42,10 @@ public class Flight {
     private Airport arrivalAirport;
 
     private int numberOfPassengers;
+
+    @ManyToOne
+    @JoinColumn(name = "airline_id")
+    private Airline airline;
 
 
 
@@ -116,5 +121,13 @@ public class Flight {
 
     public void setNumberOfPassengers(int numberOfPassengers) {
         this.numberOfPassengers = numberOfPassengers;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }

@@ -1,5 +1,6 @@
 package com.keyin.aircraft;
 
+import com.keyin.airline.Airline;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,10 @@ public class Aircraft {
     private int capacity;
     @Column(name = "airline_name")
     private String airlineName;
+
+    @ManyToOne
+    @JoinColumn(name = "airline_id")
+    private Airline airline;
 
     // Getters and Setters
     public Long getId() {
@@ -54,5 +59,13 @@ public class Aircraft {
 
     public void setAirlineName(String airlineName) {
         this.airlineName = airlineName;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }
