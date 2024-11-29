@@ -4,6 +4,7 @@ package com.keyin.airport;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.city.City;
 import com.keyin.flight.Flight;
+import com.keyin.gate.Gate;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -43,6 +44,9 @@ public class Airport {
     )
     @Column(name = "aircraft_type")
     private List<String> supportedAircraftTypes;
+
+    @OneToMany(mappedBy = "airport",cascade = CascadeType.ALL)
+    private List<Gate> gates;
 
     // Add getter and setter
     public List<String> getSupportedAircraftTypes() {
@@ -104,7 +108,12 @@ public class Airport {
         this.arrivals = arrivals;
     }
 
+    public List<Gate> getGates() {
+        return gates;
+    }
 
-
+    public void setGates(List<Gate> gates) {
+        this.gates = gates;
+    }
 }
 
