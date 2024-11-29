@@ -30,13 +30,13 @@ public class AirlineService {
         Optional<Airline> airlineToUpdateOptional = airlineRepository.findById(id);
 
         if (airlineToUpdateOptional.isPresent()){
-            Airline cityToUpdate = airlineToUpdateOptional.get();
-            cityToUpdate.setName(updatedAirline.getName());
-            cityToUpdate.setCountry((updatedAirline.getCountry()));
-            cityToUpdate.setFleetSize((updatedAirline.getFleetSize()));
-            cityToUpdate.setAircraft((updatedAirline.getAircraft()));
-            cityToUpdate.setFlight((updatedAirline.getFlight()));
-            return airlineRepository.save(cityToUpdate);
+            Airline gateToUpdate = airlineToUpdateOptional.get();
+            gateToUpdate.setName(updatedAirline.getName());
+            gateToUpdate.setCountry((updatedAirline.getCountry()));
+            gateToUpdate.setFleetSize((updatedAirline.getFleetSize()));
+            gateToUpdate.setAircraft((updatedAirline.getAircraft()));
+            gateToUpdate.setFlight((updatedAirline.getFlight()));
+            return airlineRepository.save(gateToUpdate);
         }
         return null;
     }

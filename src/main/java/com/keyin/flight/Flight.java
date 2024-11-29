@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airline.Airline;
 import com.keyin.airport.Airport;
+import com.keyin.gate.Gate;
 import com.keyin.passenger.Passenger;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -55,6 +56,10 @@ public class Flight {
     @ManyToMany (mappedBy = "flights")
     @JsonIgnore
     private List<Passenger> passengers;
+
+    @ManyToOne
+    @JoinColumn(name = "gate_id")
+    private Gate gate;
 
 
 
@@ -129,5 +134,13 @@ public class Flight {
 
     public void setAirline(Airline airline) {
         this.airline = airline;
+    }
+
+    public Gate getGate() {
+        return gate;
+    }
+
+    public void setGate(Gate gate) {
+        this.gate = gate;
     }
 }
