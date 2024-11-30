@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/aircrafts")
+@RequestMapping("/aircraft")
 @CrossOrigin
 public class AircraftController {
 
@@ -17,7 +17,7 @@ public class AircraftController {
     private AircraftService aircraftService;
 
     @GetMapping
-    public List<Aircraft> getAllAircrafts() {
+    public List<Aircraft> getAllAircraft() {
         return aircraftService.findAllAircrafts();
     }
 

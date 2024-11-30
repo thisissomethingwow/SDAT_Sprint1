@@ -17,11 +17,8 @@ public class Airline {
     private String country;
     private int fleetSize;
 
-    @OneToMany(mappedBy = "airline",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "airline",cascade = CascadeType.ALL)//this means that when in this case an airline gets saved,deleted and updated all of its aircraft change to match
     private List<Aircraft> aircraft;
-
-
-
 
     @OneToMany(mappedBy = "airline",cascade = CascadeType.ALL)
     private List<Flight> flight;
