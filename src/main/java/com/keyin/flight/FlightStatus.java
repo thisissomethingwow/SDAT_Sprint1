@@ -1,7 +1,7 @@
 package com.keyin.flight;
 
 
-public enum FlightEnum {
+public enum FlightStatus {
     Scheduled,
     Active,
     Delayed,

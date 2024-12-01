@@ -6,6 +6,7 @@ import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -29,26 +30,26 @@ public class FlightService {
         return flightRepository.save(flight);
     }
 
-    // update a flight
-    public Flight updateFlight(Long id,Flight updatedFlight) {
-
-            Optional<Flight> flightToUpdateOptional = flightRepository.findById(id);
-
-            if (flightToUpdateOptional.isPresent()) {
-                Flight flightToUpdate = flightToUpdateOptional.get();
-
-                // update fields
-                flightToUpdate.setAircraft(updatedFlight.getAircraft());
-                flightToUpdate.setDepartureAirport(updatedFlight.getDepartureAirport());
-                flightToUpdate.setArrivalAirport(updatedFlight.getArrivalAirport());
-                flightToUpdate.setDepartureTime(updatedFlight.getDepartureTime());
-                flightToUpdate.setArrivalTime(updatedFlight.getArrivalTime());
-                flightToUpdate.setPassengers(updatedFlight.getPassengers());
-
-                return flightRepository.save(flightToUpdate);
-            }
-            return null; // return null if not found
-        }
+//    // update a flight
+//    public Flight updateFlight(Long id,Flight updatedFlight) {
+//
+//            Optional<Flight> flightToUpdateOptional = flightRepository.findById(id);
+//
+//            if (flightToUpdateOptional.isPresent()) {
+//                Flight flightToUpdate = flightToUpdateOptional.get();
+//
+//                // update fields
+//                flightToUpdate.setAircraft(updatedFlight.getAircraft());
+//                flightToUpdate.setDepartureAirport(updatedFlight.getDepartureAirport());
+//                flightToUpdate.setArrivalAirport(updatedFlight.getArrivalAirport());
+//                flightToUpdate.setDepartureTime(updatedFlight.getDepartureTime());
+//                flightToUpdate.setArrivalTime(updatedFlight.getArrivalTime());
+//                flightToUpdate.setPassengers(updatedFlight.getPassengers());
+//
+//                return flightRepository.save(flightToUpdate);
+//            }
+//            return null; // return null if not found
+//        }
     // Delete flight by ID
 
     public void deleteFlight(Long id) {
@@ -68,6 +69,55 @@ public class FlightService {
     // Get aircraft used by a specific passenger
     public List<Aircraft> getAircraftByPassenger(Long passengerId) {
         return flightRepository.findAircraftByPassengerId(passengerId);
+    }
+    public List<Flight> getFlightsByAirline(Long airlineId) {
+        return flightRepository.findByAirlineId(airlineId);
+    }
+
+    public List<Flight> getFlightsByGate(Long gateId) {
+        return flightRepository.findByGateId(gateId);
+    }
+
+    public List<Flight> getFlightsByStatus(FlightStatus status) {
+        return flightRepository.findByFlightStatus(status);
+    }
+
+    public List<Flight> getDepartureFlights(Long airportId) {
+        return flightRepository.findByDepartureAirportId(airportId);
+    }
+
+    public List<Flight> getArrivalFlights(Long airportId) {
+        return flightRepository.findByArrivalAirportId(airportId);
+    }
+
+    public List<Flight> getFlightsByTimeRange(LocalDateTime start, LocalDateTime end) {
+        return flightRepository.findFlightsByTimeRange(start, end);
+    }
+
+    // update a flight
+    public Flight updateFlight(Long id, Flight updatedFlight) {
+        Optional<Flight> flightToUpdateOptional = flightRepository.findById(id);
+
+        if (flightToUpdateOptional.isPresent()) {
+            Flight flightToUpdate = flightToUpdateOptional.get();
+
+            // Update all fields
+            flightToUpdate.setAircraft(updatedFlight.getAircraft());
+            flightToUpdate.setDepartureAirport(updatedFlight.getDepartureAirport());
+            flightToUpdate.setArrivalAirport(updatedFlight.getArrivalAirport());
+            flightToUpdate.setDepartureTime(updatedFlight.getDepartureTime());
+            flightToUpdate.setArrivalTime(updatedFlight.getArrivalTime());
+            flightToUpdate.setPassengers(updatedFlight.getPassengers());
+            flightToUpdate.setNumberOfPassengers(updatedFlight.getNumberOfPassengers());
+            flightToUpdate.setAirline(updatedFlight.getAirline());
+            flightToUpdate.setGate(updatedFlight.getGate());
+            flightToUpdate.setFlightStatus(updatedFlight.getFlightStatus());
+            flightToUpdate.setDepartureGate(updatedFlight.getDepartureGate());
+            flightToUpdate.setArrivalGate(updatedFlight.getArrivalGate());
+
+            return flightRepository.save(flightToUpdate);
+        }
+        return null;
     }
 
 

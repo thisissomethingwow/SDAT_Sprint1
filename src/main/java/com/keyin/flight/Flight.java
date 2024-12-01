@@ -3,7 +3,6 @@ package com.keyin.flight;
 
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airline.Airline;
@@ -49,7 +48,7 @@ public class Flight {
     private Airline airline;
 
     @Enumerated(EnumType.STRING)
-    private FlightEnum flightEnum;
+    private FlightStatus flightStatus;
 
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
@@ -61,6 +60,14 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "gate_id")
     private Gate gate;
+
+    @ManyToOne
+    @JoinColumn(name = "departure_gate_id")
+    private Gate departureGate;
+
+    @ManyToOne
+    @JoinColumn(name = "arrival_gate_id")
+    private Gate arrivalGate;
 
 
 
@@ -145,11 +152,26 @@ public class Flight {
         this.gate = gate;
     }
 
-    public FlightEnum getFlightEnum() {
-        return flightEnum;
+    public FlightStatus getFlightStatus() {
+        return flightStatus;
     }
 
-    public void setFlightEnum(FlightEnum flightEnum) {
-        this.flightEnum = flightEnum;
+    public void setFlightStatus(FlightStatus flightStatus) {
+        this.flightStatus = flightStatus;
+    }
+    public Gate getDepartureGate() {
+        return departureGate;
+    }
+
+    public void setDepartureGate(Gate departureGate) {
+        this.departureGate = departureGate;
+    }
+
+    public Gate getArrivalGate() {
+        return arrivalGate;
+    }
+
+    public void setArrivalGate(Gate arrivalGate) {
+        this.arrivalGate = arrivalGate;
     }
 }

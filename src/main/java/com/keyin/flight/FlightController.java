@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -85,4 +86,43 @@ public class FlightController {
         }
         return new ResponseEntity<>(aircraft, HttpStatus.OK);
     }
+    @GetMapping("/airline/{airlineId}")
+    public ResponseEntity<List<Flight>> getFlightsByAirline(@PathVariable Long airlineId) {
+        List<Flight> flights = flightService.getFlightsByAirline(airlineId);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @GetMapping("/gate/{gateId}")
+    public ResponseEntity<List<Flight>> getFlightsByGate(@PathVariable Long gateId) {
+        List<Flight> flights = flightService.getFlightsByGate(gateId);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Flight>> getFlightsByStatus(@PathVariable FlightStatus status) {
+        List<Flight> flights = flightService.getFlightsByStatus(status);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @GetMapping("/departures/{airportId}")
+    public ResponseEntity<List<Flight>> getDepartureFlights(@PathVariable Long airportId) {
+        List<Flight> flights = flightService.getDepartureFlights(airportId);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @GetMapping("/arrivals/{airportId}")
+    public ResponseEntity<List<Flight>> getArrivalFlights(@PathVariable Long airportId) {
+        List<Flight> flights = flightService.getArrivalFlights(airportId);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+    @GetMapping("/timerange")
+    public ResponseEntity<List<Flight>> getFlightsByTimeRange(
+            @RequestParam LocalDateTime start,
+            @RequestParam LocalDateTime end) {
+        List<Flight> flights = flightService.getFlightsByTimeRange(start, end);
+        return new ResponseEntity<>(flights, HttpStatus.OK);
+    }
+
+
 }
