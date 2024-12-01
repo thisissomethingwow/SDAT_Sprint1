@@ -48,7 +48,8 @@ public class Flight {
     @JoinColumn(name = "airline_id")
     private Airline airline;
 
-
+    @Enumerated(EnumType.STRING)
+    private FlightEnum flightEnum;
 
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
@@ -142,5 +143,13 @@ public class Flight {
 
     public void setGate(Gate gate) {
         this.gate = gate;
+    }
+
+    public FlightEnum getFlightEnum() {
+        return flightEnum;
+    }
+
+    public void setFlightEnum(FlightEnum flightEnum) {
+        this.flightEnum = flightEnum;
     }
 }
