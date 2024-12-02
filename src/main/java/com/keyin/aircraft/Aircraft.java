@@ -52,13 +52,6 @@ public class Aircraft {
         this.capacity = capacity;
     }
 
-    public String getAirlineName() {
-        return airlineName;
-    }
-
-    public void setAirlineName(String airlineName) {
-        this.airlineName = airlineName;
-    }
 
     public Airline getAirline() {
         return airline;
