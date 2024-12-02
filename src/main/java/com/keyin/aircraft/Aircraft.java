@@ -21,8 +21,7 @@ public class Aircraft {
 
     private String model;
     private int capacity;
-    @Column(name = "airline_name")
-    private String airlineName;
+
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
