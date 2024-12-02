@@ -15,7 +15,6 @@ public class AirlineService {
         return airlineRepository.findAll();
     }
 
-
     public Airline getAllAirlineById(Long id){
         return airlineRepository.findById(id).orElse(null);
     }
@@ -24,21 +23,20 @@ public class AirlineService {
         return airlineRepository.save(airline);
     }
 
-    public void deleteAirlineById(Long id){airlineRepository.deleteById(id);}
+    public void deleteAirlineById(Long id){
+        airlineRepository.deleteById(id);
+    }
 
-    public Airline updateAirline(long id,Airline updatedAirline){
+    public Airline updateAirline(long id, Airline updatedAirline){
         Optional<Airline> airlineToUpdateOptional = airlineRepository.findById(id);
 
         if (airlineToUpdateOptional.isPresent()){
-            Airline gateToUpdate = airlineToUpdateOptional.get();
-            gateToUpdate.setName(updatedAirline.getName());
-            gateToUpdate.setCountry((updatedAirline.getCountry()));
-            gateToUpdate.setFleetSize((updatedAirline.getFleetSize()));
-            gateToUpdate.setAircraft((updatedAirline.getAircraft()));
-            gateToUpdate.setFlight((updatedAirline.getFlight()));
-            return airlineRepository.save(gateToUpdate);
+            Airline airlineToUpdate = airlineToUpdateOptional.get();
+            airlineToUpdate.setName(updatedAirline.getName());
+            airlineToUpdate.setAircraft(updatedAirline.getAircraft());
+            airlineToUpdate.setFlight(updatedAirline.getFlight());
+            return airlineRepository.save(airlineToUpdate);
         }
         return null;
     }
-
 }
