@@ -24,7 +24,6 @@ import java.util.List;
     @Query("SELECT DISTINCT f.aircraft FROM Flight f JOIN f.passengers p WHERE p.id = :passengerId")
     List<Aircraft> findAircraftByPassengerId(@Param("passengerId") Long passengerId);
     List<Flight> findByAirlineId(Long airlineId);
-    List<Flight> findByGateId(Long gateId);
     List<Flight> findByFlightStatus(FlightStatus status);
     List<Flight> findByDepartureAirportId(Long airportId);
     List<Flight> findByArrivalAirportId(Long airportId);
