@@ -1,5 +1,6 @@
 package com.keyin.aircraft;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.keyin.airline.Airline;
 import jakarta.persistence.*;
 
@@ -25,6 +26,7 @@ public class Aircraft {
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
+    @JsonBackReference // Prevents serialization of the back reference to Airline
     private Airline airline;
 
     // Getters and Setters

@@ -25,32 +25,17 @@ public class FlightService {
         return flightRepository.findById(id).orElse(null);
     }
 
-    // add a new flight
+    // Add a new flight
     public Flight addFlight(Flight flight) {
-        return flightRepository.save(flight);
+        if (flight.getFlightStatus() == null) {
+            flight.setFlightStatus(FlightStatus.Scheduled);
+        }
+        Flight savedFlight = flightRepository.save(flight);
+        savedFlight.setFlightNumber("FL" + String.format("%03d", savedFlight.getId()));
+        return flightRepository.save(savedFlight);
     }
 
-//    // update a flight
-//    public Flight updateFlight(Long id,Flight updatedFlight) {
-//
-//            Optional<Flight> flightToUpdateOptional = flightRepository.findById(id);
-//
-//            if (flightToUpdateOptional.isPresent()) {
-//                Flight flightToUpdate = flightToUpdateOptional.get();
-//
-//                // update fields
-//                flightToUpdate.setAircraft(updatedFlight.getAircraft());
-//                flightToUpdate.setDepartureAirport(updatedFlight.getDepartureAirport());
-//                flightToUpdate.setArrivalAirport(updatedFlight.getArrivalAirport());
-//                flightToUpdate.setDepartureTime(updatedFlight.getDepartureTime());
-//                flightToUpdate.setArrivalTime(updatedFlight.getArrivalTime());
-//                flightToUpdate.setPassengers(updatedFlight.getPassengers());
-//
-//                return flightRepository.save(flightToUpdate);
-//            }
-//            return null; // return null if not found
-//        }
-    // Delete flight by ID
+
 
     public void deleteFlight(Long id) {
             flightRepository.deleteById(id);
@@ -63,7 +48,6 @@ public class FlightService {
         Set<Airport> uniqueAirports = new HashSet<>();
         uniqueAirports.addAll(departureAirports);
         uniqueAirports.addAll(arrivalAirports);
-
         return new ArrayList<>(uniqueAirports);
     }
     // Get aircraft used by a specific passenger
@@ -74,9 +58,6 @@ public class FlightService {
         return flightRepository.findByAirlineId(airlineId);
     }
 
-    public List<Flight> getFlightsByGate(Long gateId) {
-        return flightRepository.findByGateId(gateId);
-    }
 
     public List<Flight> getFlightsByStatus(FlightStatus status) {
         return flightRepository.findByFlightStatus(status);
@@ -110,7 +91,6 @@ public class FlightService {
             flightToUpdate.setPassengers(updatedFlight.getPassengers());
             flightToUpdate.setNumberOfPassengers(updatedFlight.getNumberOfPassengers());
             flightToUpdate.setAirline(updatedFlight.getAirline());
-            flightToUpdate.setGate(updatedFlight.getGate());
             flightToUpdate.setFlightStatus(updatedFlight.getFlightStatus());
             flightToUpdate.setDepartureGate(updatedFlight.getDepartureGate());
             flightToUpdate.setArrivalGate(updatedFlight.getArrivalGate());

@@ -39,7 +39,7 @@ public class FlightController {
 
     // get flight by id
     @GetMapping("/{id}")
-    public ResponseEntity<Flight> getFlightById(Long id) {
+    public ResponseEntity<Flight> getFlightById(@PathVariable Long id) {
         Flight flight = flightService.getFlightById(id);
         if (flight == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -92,11 +92,7 @@ public class FlightController {
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
-    @GetMapping("/gate/{gateId}")
-    public ResponseEntity<List<Flight>> getFlightsByGate(@PathVariable Long gateId) {
-        List<Flight> flights = flightService.getFlightsByGate(gateId);
-        return new ResponseEntity<>(flights, HttpStatus.OK);
-    }
+
 
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Flight>> getFlightsByStatus(@PathVariable FlightStatus status) {

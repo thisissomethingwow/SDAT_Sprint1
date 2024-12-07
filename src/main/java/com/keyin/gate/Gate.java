@@ -3,14 +3,17 @@ package com.keyin.gate;
 import com.keyin.airport.Airport;
 import com.keyin.flight.Flight;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
+
 
 @Entity
 public class Gate {
     @Id
-    @SequenceGenerator(name = "airline_sequence", sequenceName = "airline_sequence", allocationSize = 1, initialValue=1)
-    @GeneratedValue(generator = "airline_sequence")
+    @SequenceGenerator(name = "gate_sequence", sequenceName = "gate_sequence", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gate_sequence")
     private Long id;
 
     private String gateNumber;
@@ -19,12 +22,38 @@ public class Gate {
 
     @ManyToOne
     @JoinColumn(name = "airport_id")
+    @JsonBackReference
     private Airport airport;
 
+    @OneToMany(mappedBy = "departureGate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Flight> departureFlights;
 
-    @OneToMany(mappedBy = "gate",cascade = CascadeType.ALL)
-    private List<Flight> flights;
+    @OneToMany(mappedBy = "arrivalGate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Flight> arrivalFlights;
 
+    // Default constructor
+    public Gate() {}
+
+    // Getters and Setters for departureFlights and arrivalFlights
+    public List<Flight> getDepartureFlights() {
+        return departureFlights;
+    }
+
+    public void setDepartureFlights(List<Flight> departureFlights) {
+        this.departureFlights = departureFlights;
+    }
+
+    public List<Flight> getArrivalFlights() {
+        return arrivalFlights;
+    }
+
+    public void setArrivalFlights(List<Flight> arrivalFlights) {
+        this.arrivalFlights = arrivalFlights;
+    }
+
+    // Additional methods for other fields
     public Long getId() {
         return id;
     }
@@ -63,30 +92,5 @@ public class Gate {
 
     public void setAirport(Airport airport) {
         this.airport = airport;
-    }
-
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
-    }
-
-    public Gate(String gateNumber, String status, String terminal, Airport airport, List<Flight> flights) {
-        this.gateNumber = gateNumber;
-        this.status = status;
-        this.terminal = terminal;
-        this.airport = airport;
-        this.flights = flights;
-    }
-
-    public Gate(Long id, String gateNumber, String status, String terminal, Airport airport, List<Flight> flights) {
-        this.id = id;
-        this.gateNumber = gateNumber;
-        this.status = status;
-        this.terminal = terminal;
-        this.airport = airport;
-        this.flights = flights;
     }
 }

@@ -62,4 +62,27 @@ public class PassengerController {
         }
         return new ResponseEntity<>(aircraftList, HttpStatus.OK);  // Return the list of aircraft
     }
+
+    // Book a flight for a passenger
+    @PostMapping("/passengers/{passengerId}/book/{flightId}")
+    public ResponseEntity<Passenger> bookFlight(
+            @PathVariable Long passengerId,
+            @PathVariable Long flightId) {
+        Passenger updatedPassenger = passengerService.bookFlight(passengerId, flightId);
+        if (updatedPassenger == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedPassenger);
+    }
+    @DeleteMapping("/passengers/{passengerId}/cancel/{flightId}")
+    public ResponseEntity<Passenger> cancelFlight(
+            @PathVariable Long passengerId,
+            @PathVariable Long flightId) {
+        Passenger updatedPassenger = passengerService.cancelFlight(passengerId, flightId);
+        if (updatedPassenger == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedPassenger);
+    }
+
 }

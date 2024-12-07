@@ -1,8 +1,5 @@
 package com.keyin.flight;
 
-
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airline.Airline;
@@ -11,7 +8,6 @@ import com.keyin.gate.Gate;
 import com.keyin.passenger.Passenger;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
 import java.util.List;
 
 @Entity
@@ -29,22 +25,29 @@ public class Flight {
     )
     private Long id;
 
+    @Column(unique = true)
+    private String flightNumber;
+
     @ManyToOne
     @JoinColumn(name= "aircraft_id")
+    @JsonIgnore
     private Aircraft aircraft;
 
     @ManyToOne
     @JoinColumn(name = "departure_airport_id")
+    @JsonIgnore
     private Airport departureAirport;
 
     @ManyToOne
     @JoinColumn(name = "arrival_airport_id", nullable = false)
+    @JsonIgnore
     private Airport arrivalAirport;
 
     private int numberOfPassengers;
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
+    @JsonIgnore
     private Airline airline;
 
     @Enumerated(EnumType.STRING)
@@ -53,22 +56,24 @@ public class Flight {
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
 
-    @ManyToMany (mappedBy = "flights")
+    @ManyToMany(mappedBy = "flights")
     @JsonIgnore
     private List<Passenger> passengers;
 
-    @ManyToOne
-    @JoinColumn(name = "gate_id")
-    private Gate gate;
+//    @ManyToOne
+//    @JoinColumn(name = "gate_id")
+////    @JsonIgnore
+//    private Gate gate;
 
     @ManyToOne
     @JoinColumn(name = "departure_gate_id")
+    @JsonIgnore
     private Gate departureGate;
 
     @ManyToOne
     @JoinColumn(name = "arrival_gate_id")
+    @JsonIgnore
     private Gate arrivalGate;
-
 
 
     // Getters and Setters
@@ -144,12 +149,12 @@ public class Flight {
         this.airline = airline;
     }
 
-    public Gate getGate() {
-        return gate;
+    public String getFlightNumber() {
+        return flightNumber;
     }
 
-    public void setGate(Gate gate) {
-        this.gate = gate;
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 
     public FlightStatus getFlightStatus() {
