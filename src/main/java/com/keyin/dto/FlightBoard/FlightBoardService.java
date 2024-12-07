@@ -29,6 +29,8 @@ public class FlightBoardService {
                 flight.getArrivalAirport().getCode(),
                 flight.getDepartureGate().getGateNumber(),
                 flight.getArrivalGate().getGateNumber(),
+                flight.getDepartureAirport().getCity().getName(), // Use City name
+                flight.getArrivalAirport().getCity().getName(),
                 flight.getDepartureTime(),
                 flight.getArrivalTime(),
                 flight.getFlightStatus(),
