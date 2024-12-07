@@ -20,8 +20,12 @@ public class AirlineController {
     }
 
     @GetMapping("/{id}")
-    public  List<Airline> getAllAirlineById(Long id){
-        return (List<Airline>) airlineService.getAllAirlineById(id);
+    public ResponseEntity<Airline> getAllAirlineById(@PathVariable Long id) {
+        Airline airline = airlineService.getAllAirlineById(id);
+        if (airline == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(airline);
     }
 
     @PostMapping

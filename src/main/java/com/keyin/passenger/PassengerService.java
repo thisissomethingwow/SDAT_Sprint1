@@ -2,6 +2,7 @@ package com.keyin.passenger;
 
 import com.keyin.aircraft.Aircraft;
 import com.keyin.flight.Flight;
+import com.keyin.flight.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 public class PassengerService {
     @Autowired
     private PassengerRepository passengerRepository;
+    @Autowired
+    private FlightRepository flightRepository;
 
     // Get all passengers
     public List<Passenger> getAllPassengers() {
@@ -65,5 +68,28 @@ public class PassengerService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();  // Return an empty list if no passenger is found
+    }
+    public Passenger bookFlight(Long passengerId, Long flightId) {
+        Optional<Passenger> passenger = passengerRepository.findById(passengerId);
+        Optional<Flight> flight = flightRepository.findById(flightId);
+
+        if (passenger.isPresent() && flight.isPresent()) {
+            Passenger p = passenger.get();
+            p.getFlights().add(flight.get());
+            return passengerRepository.save(p);
+        }
+        return null;
+    }
+
+    public Passenger cancelFlight(Long passengerId, Long flightId) {
+        Optional<Passenger> passenger = passengerRepository.findById(passengerId);
+        Optional<Flight> flight = flightRepository.findById(flightId);
+
+        if (passenger.isPresent() && flight.isPresent()) {
+            Passenger p = passenger.get();
+            p.getFlights().remove(flight.get());
+            return passengerRepository.save(p);
+        }
+        return null;
     }
 }

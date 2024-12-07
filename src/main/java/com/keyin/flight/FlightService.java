@@ -25,9 +25,14 @@ public class FlightService {
         return flightRepository.findById(id).orElse(null);
     }
 
-    // add a new flight
+    // Add a new flight
     public Flight addFlight(Flight flight) {
-        return flightRepository.save(flight);
+        if (flight.getFlightStatus() == null) {
+            flight.setFlightStatus(FlightStatus.Scheduled);
+        }
+        Flight savedFlight = flightRepository.save(flight);
+        savedFlight.setFlightNumber("FL" + String.format("%03d", savedFlight.getId()));
+        return flightRepository.save(savedFlight);
     }
 
 

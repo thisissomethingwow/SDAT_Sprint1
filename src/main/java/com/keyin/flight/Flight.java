@@ -25,6 +25,9 @@ public class Flight {
     )
     private Long id;
 
+    @Column(unique = true)
+    private String flightNumber;
+
     @ManyToOne
     @JoinColumn(name= "aircraft_id")
     @JsonIgnore
@@ -146,13 +149,13 @@ public class Flight {
         this.airline = airline;
     }
 
-//    public Gate getGate() {
-//        return gate;
-//    }
-//
-//    public void setGate(Gate gate) {
-//        this.gate = gate;
-//    }
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
 
     public FlightStatus getFlightStatus() {
         return flightStatus;
