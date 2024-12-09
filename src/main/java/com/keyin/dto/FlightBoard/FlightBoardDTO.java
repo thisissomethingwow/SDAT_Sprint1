@@ -4,12 +4,13 @@ import com.keyin.flight.FlightStatus;
 import java.time.LocalDateTime;
 
 public class FlightBoardDTO {
+    private Long flightId;  // New field
     private String flightNumber;
     private String airline;
     private String departureAirport;
     private String arrivalAirport;
-    private String departureCity; // New field
-    private String arrivalCity;   // New field
+    private String departureCity;
+    private String arrivalCity;
     private String departureGate;
     private String arrivalGate;
     private LocalDateTime departureTime;
@@ -18,11 +19,12 @@ public class FlightBoardDTO {
     private int numberOfPassengers;
     private int aircraftCapacity;
 
-    public FlightBoardDTO(String flightNumber, String airline, String departureAirport,
+    public FlightBoardDTO(Long flightId, String flightNumber, String airline, String departureAirport,
                           String arrivalAirport, String departureCity, String arrivalCity,
                           String departureGate, String arrivalGate, LocalDateTime departureTime,
                           LocalDateTime arrivalTime, FlightStatus status, int numberOfPassengers,
                           int aircraftCapacity) {
+        this.flightId = flightId;
         this.flightNumber = flightNumber;
         this.airline = airline;
         this.departureAirport = departureAirport;
@@ -36,6 +38,15 @@ public class FlightBoardDTO {
         this.status = status;
         this.numberOfPassengers = numberOfPassengers;
         this.aircraftCapacity = aircraftCapacity;
+    }
+
+    // Getters and setters
+    public Long getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(Long flightId) {
+        this.flightId = flightId;
     }
 
     // Getters and setter
