@@ -23,14 +23,15 @@ public class FlightBoardService {
 
     private FlightBoardDTO convertToFlightBoardDTO(Flight flight) {
         return new FlightBoardDTO(
-                flight.getFlightNumber(),  // Use flightNumber instead of ID
+                flight.getId(),  // Fetching flightId from the DB record
+                flight.getFlightNumber(),
                 flight.getAirline().getName(),
                 flight.getDepartureAirport().getCode(),
                 flight.getArrivalAirport().getCode(),
+                flight.getDepartureAirport().getCity().getName(),
+                flight.getArrivalAirport().getCity().getName(),
                 flight.getDepartureGate().getGateNumber(),
                 flight.getArrivalGate().getGateNumber(),
-                flight.getDepartureAirport().getCity().getName(), // Use City name
-                flight.getArrivalAirport().getCity().getName(),
                 flight.getDepartureTime(),
                 flight.getArrivalTime(),
                 flight.getFlightStatus(),

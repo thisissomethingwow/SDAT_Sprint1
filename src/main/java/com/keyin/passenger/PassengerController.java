@@ -43,13 +43,13 @@ public class PassengerController {
         return passengerService.addPassenger(passenger);  // Directly return Passenger without ResponseEntity
     }
 
-    //for the front end
-    @PostMapping("/api/passengers")
-    public Passenger addPassengerApi(@RequestBody Passenger passenger) {
-        City city = cityRepository.findById(passenger.getCity().getId()).orElseThrow(()->new RuntimeException("city not found"));
-        passenger.setCity(city);
-        return passengerService.addPassenger(passenger);
-    }
+//    //for the front end
+//    @PostMapping("/api/passengers")
+//    public Passenger addPassengerApi(@RequestBody Passenger passenger) {
+//        City city = cityRepository.findById(passenger.getCity().getId()).orElseThrow(()->new RuntimeException("city not found"));
+//        passenger.setCity(city);
+//        return passengerService.addPassenger(passenger);
+//    }
 
     // Update an existing passenger
     @PutMapping("/passengers/{id}")
