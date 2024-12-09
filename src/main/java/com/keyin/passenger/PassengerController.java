@@ -1,6 +1,9 @@
 package com.keyin.passenger;
 
 import com.keyin.aircraft.Aircraft;
+import com.keyin.city.City;
+import com.keyin.city.CityRepository;
+import com.keyin.city.CityServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,9 @@ public class PassengerController {
 
     @Autowired
     private PassengerService passengerService;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     // Get all passengers
     @GetMapping("/passengers")
@@ -35,6 +41,14 @@ public class PassengerController {
     @PostMapping("/passengers")
     public Passenger addPassenger(@RequestBody Passenger passenger) {
         return passengerService.addPassenger(passenger);  // Directly return Passenger without ResponseEntity
+    }
+
+    //for the front end
+    @PostMapping("/api/passengers")
+    public Passenger addPassengerApi(@RequestBody Passenger passenger) {
+        City city = cityRepository.findById(passenger.getCity().getId()).orElseThrow(()->new RuntimeException("city not found"));
+        passenger.setCity(city);
+        return passengerService.addPassenger(passenger);
     }
 
     // Update an existing passenger
