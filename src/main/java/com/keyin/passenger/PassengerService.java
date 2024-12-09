@@ -1,15 +1,15 @@
 package com.keyin.passenger;
 
-import com.keyin.aircraft.Aircraft;
 import com.keyin.flight.Flight;
 import com.keyin.flight.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import  java.util.List;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import com.keyin.aircraft.Aircraft;
 
 @Service
 public class PassengerService {
@@ -26,7 +26,7 @@ public class PassengerService {
     // Get passenger by ID
     public Passenger getPassengerById(Long id) {
         Optional<Passenger> passengerOptional = passengerRepository.findById(id);
-        return  passengerOptional.orElse(null);
+        return passengerOptional.orElse(null);
     }
 
     // Add a new passenger
@@ -35,7 +35,6 @@ public class PassengerService {
     }
 
     // Update an existing passenger
-
     public Passenger updatePassenger(Long id, Passenger updatedPassenger) {
         Optional<Passenger> passengertoUpdateOptional = passengerRepository.findById(id);
 
@@ -45,17 +44,17 @@ public class PassengerService {
             passengerToUpdate.setFirstName(updatedPassenger.getFirstName());
             passengerToUpdate.setLastName(updatedPassenger.getLastName());
             passengerToUpdate.setPhoneNumber(updatedPassenger.getPhoneNumber());
-            passengerToUpdate.setCity(updatedPassenger.getCity());
+            passengerToUpdate.setPassengerCity(updatedPassenger.getPassengerCity());
 
             return passengerRepository.save(passengerToUpdate);
         }
         return null;
     }
+
     // Delete a passenger by ID
     public void deletePassenger(Long id) {
         passengerRepository.deleteById(id);
     }
-
 
     public List<Aircraft> getAircraftByPassenger(Long passengerId) {
         Optional<Passenger> passengerOptional = passengerRepository.findById(passengerId);
@@ -69,6 +68,7 @@ public class PassengerService {
         }
         return Collections.emptyList();  // Return an empty list if no passenger is found
     }
+
     public Passenger bookFlight(Long passengerId, Long flightId) {
         Optional<Passenger> passenger = passengerRepository.findById(passengerId);
         Optional<Flight> flight = flightRepository.findById(flightId);

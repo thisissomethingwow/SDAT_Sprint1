@@ -1,13 +1,9 @@
 package com.keyin.passenger;
 
-import com.keyin.airport.Airport;
-import com.keyin.city.City;
 import com.keyin.flight.Flight;
 import jakarta.persistence.*;
 
-
 import java.util.List;
-
 
 @Entity
 public class Passenger {
@@ -28,10 +24,7 @@ public class Passenger {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
+    private String passengerCity; // New field for city name
 
     @ManyToMany
     @JoinTable(
@@ -39,11 +32,6 @@ public class Passenger {
             joinColumns = @JoinColumn(name = "passenger_id"),
             inverseJoinColumns = @JoinColumn(name = "flight_id")
     )
-
-
-
-
-
     private List<Flight> flights;
 
     // Getters and Setters
@@ -79,12 +67,12 @@ public class Passenger {
         this.phoneNumber = phoneNumber;
     }
 
-    public City getCity() {
-        return city;
+    public String getPassengerCity() {
+        return passengerCity;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setPassengerCity(String passengerCity) {
+        this.passengerCity = passengerCity;
     }
 
     public List<Flight> getFlights() {
