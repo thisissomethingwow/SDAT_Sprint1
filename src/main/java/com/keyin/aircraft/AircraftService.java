@@ -52,4 +52,8 @@ public class AircraftService {
     public void deleteAircraft(Long id) {
         aircraftRepository.deleteById(id);
     }
+    public List<Aircraft> getAllAircraft() {
+        return (List<Aircraft>) aircraftRepository.findAll();
+    }
+
 }

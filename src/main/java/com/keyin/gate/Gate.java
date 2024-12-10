@@ -22,7 +22,6 @@ public class Gate {
 
     @ManyToOne
     @JoinColumn(name = "airport_id")
-    @JsonBackReference
     private Airport airport;
 
     @OneToMany(mappedBy = "departureGate", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
