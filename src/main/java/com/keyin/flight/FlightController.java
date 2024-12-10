@@ -67,15 +67,26 @@ public class FlightController {
         }
         return new ResponseEntity<>(updatedFlight, HttpStatus.OK);
     }
-    @DeleteMapping
-    public ResponseEntity<Flight> deleteFlight(@PathVariable Long id){
-        Flight flight = flightService.getFlightById(id);
-        if (flight == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<String> deleteFlight(@PathVariable Long id) {
+        try {
+            // Fetch the flight by ID
+            Flight flight = flightService.getFlightById(id);
+            if (flight == null) {
+                return new ResponseEntity<>("Flight not found", HttpStatus.NOT_FOUND);
+            }
+
+            // Delete the flight
+            flightService.deleteFlight(id);
+            return new ResponseEntity<>("Flight deleted successfully", HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            // Handle unexpected errors
+            return new ResponseEntity<>("Error deleting flight: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        flightService.deleteFlight(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
     // Get aircraft used by a specific passenger
     @GetMapping("/passenger/{id}/aircraft")
