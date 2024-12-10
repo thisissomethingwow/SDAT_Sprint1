@@ -17,13 +17,13 @@ public class FlightBoardService {
     public List<FlightBoardDTO> getAllFlightBoardData() {
         List<Flight> flights = (List<Flight>) flightRepository.findAll();
         return flights.stream()
-                .map(this::convertToFlightBoardDTO)
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    private FlightBoardDTO convertToFlightBoardDTO(Flight flight) {
+    private FlightBoardDTO convertToDTO(Flight flight) {
         return new FlightBoardDTO(
-                flight.getId(),  // Fetching flightId from the DB record
+                flight.getId(),
                 flight.getFlightNumber(),
                 flight.getAirline().getName(),
                 flight.getDepartureAirport().getCode(),

@@ -25,7 +25,7 @@ public class Flight {
     )
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = true)
     private String flightNumber;
 
     @ManyToOne
