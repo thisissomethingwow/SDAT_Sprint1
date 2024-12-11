@@ -108,12 +108,12 @@ public class Airport {
         this.arrivals = arrivals;
     }
 
-    public List<Gate> getGates() {
-        return gates;
-    }
-
-    public void setGates(List<Gate> gates) {
-        this.gates = gates;
-    }
+//    public List<Gate> getGates() {
+//        return gates;
+//    }
+//
+//    public void setGates(List<Gate> gates) {
+//        this.gates = gates;
+//    }
 }
 
