@@ -20,10 +20,10 @@ import static org.mockito.ArgumentMatchers.anyLong;
 public class PassengerControllerTest {
 
     @InjectMocks
-    private PassengerController passengerController; // The controller to test
+    private PassengerController passengerController;
 
     @Mock
-    private PassengerService passengerService; // Mocking the service layer
+    private PassengerService passengerService;
 
     private Passenger passenger;
 
@@ -50,7 +50,6 @@ public class PassengerControllerTest {
         assertEquals("John", response.get(0).getFirstName());
     }
 
-    // Test: Get a single passenger by ID
     @Test
     void testGetPassengerById() {
         Mockito.when(passengerService.getPassengerById(anyLong())).thenReturn(passenger);
@@ -68,7 +67,6 @@ public class PassengerControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // Test: Add a new passenger
     @Test
     void testAddPassenger() {
         Mockito.when(passengerService.addPassenger(any(Passenger.class))).thenReturn(passenger);
@@ -83,7 +81,6 @@ public class PassengerControllerTest {
         assertEquals("Smith", createdPassenger.getLastName());
     }
 
-    // Test: Update an existing passenger
     @Test
     void testUpdatePassenger() {
         Mockito.when(passengerService.updatePassenger(anyLong(), any(Passenger.class))).thenReturn(passenger);
@@ -109,7 +106,6 @@ public class PassengerControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // Test: Delete a passenger
     @Test
     void testDeletePassenger() {
         Mockito.doNothing().when(passengerService).deletePassenger(anyLong());
@@ -119,7 +115,6 @@ public class PassengerControllerTest {
         Mockito.verify(passengerService, Mockito.times(1)).deletePassenger(1L);
     }
 
-    // Test: Book flight for a passenger
     @Test
     void testBookFlight() {
         Mockito.when(passengerService.bookFlight(anyLong(), anyLong())).thenReturn(passenger);
@@ -137,7 +132,6 @@ public class PassengerControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // Test: Cancel flight for a passenger
     @Test
     void testCancelFlight() {
         Mockito.when(passengerService.cancelFlight(anyLong(), anyLong())).thenReturn(passenger);
