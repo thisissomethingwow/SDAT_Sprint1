@@ -1,8 +1,13 @@
 package com.keyin.aircraft;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.keyin.airline.Airline;
+import com.keyin.flight.Flight;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Aircraft {
@@ -24,9 +29,13 @@ public class Aircraft {
     private int capacity;
 
 
+    @OneToMany(mappedBy = "aircraft")
+    @JsonManagedReference
+    private List<Flight> flights;
+
     @ManyToOne
     @JoinColumn(name = "airline_id")
-    @JsonBackReference // Prevents serialization of the back reference to Airline
+    @JsonIgnore
     private Airline airline;
 
     // Getters and Setters

@@ -1,5 +1,6 @@
 package com.keyin.airline;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.flight.Flight;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,7 +23,7 @@ public class Airline {
     private List<Aircraft> aircraft;
 
     @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference // Handles serialization of Flight list
+    @JsonIgnore// Handles serialization of Flight list
     private List<Flight> flight;
 
     // Default constructor (required by Hibernate)

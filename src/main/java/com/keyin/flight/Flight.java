@@ -1,5 +1,6 @@
 package com.keyin.flight;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airline.Airline;
@@ -30,7 +31,7 @@ public class Flight {
 
     @ManyToOne
     @JoinColumn(name= "aircraft_id")
-    @JsonIgnore
+    @JsonBackReference
     private Aircraft aircraft;
 
     @ManyToOne
