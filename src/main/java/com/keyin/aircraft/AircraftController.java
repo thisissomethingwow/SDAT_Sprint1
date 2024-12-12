@@ -67,12 +67,12 @@ public class AircraftController {
         }
         return new ResponseEntity<>(authorizedAirports, HttpStatus.OK);
     }
-    @GetMapping("/{id}/airline-name")
-    public ResponseEntity<String> getAircraftAirlineName(@PathVariable Long id) {
-        Aircraft aircraft = aircraftService.getAircraftById(id);
-        if (aircraft == null || aircraft.getAirline() == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(aircraft.getAirline().getName(), HttpStatus.OK);
-    }
+//    @GetMapping("/{id}/airline-name")
+//    public ResponseEntity<String> getAircraftAirlineName(@PathVariable Long id) {
+//        Aircraft aircraft = aircraftService.getAircraftById(id);
+//        if (aircraft == null || aircraft.getAirline() == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(aircraft.getAirline().getName(), HttpStatus.OK);
+//    }
 }
