@@ -35,7 +35,7 @@ public class Aircraft {
 
     @ManyToOne
     @JoinColumn(name = "airline_id")
-    @JsonIgnore // Prevents serialization of the back reference to Airline
+    @JsonIgnore
     private Airline airline;
 
     // Getters and Setters

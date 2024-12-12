@@ -1,7 +1,10 @@
 package com.keyin.aircraft;
 
+import com.keyin.airline.Airline;
+import com.keyin.airline.AirlineRepository;
 import com.keyin.airport.Airport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,9 @@ public class AircraftController {
 
     @Autowired
     private AircraftService aircraftService;
+    @Autowired
+    private AirlineRepository airlineRepository;
+
 
     @GetMapping
     public List<Aircraft> getAllAircraft() {
@@ -31,7 +37,18 @@ public class AircraftController {
     }
 
     @PostMapping
-    public ResponseEntity<Aircraft> addAircraft(@RequestBody Aircraft aircraft) {
+    public ResponseEntity<Aircraft> addAircraft(@RequestBody AircraftDTO aircraftDTO) {
+        // Fetch the Airline entity using the provided airlineId
+        Airline airline = airlineRepository.findById(aircraftDTO.getAirlineId())
+            .orElseThrow(() -> new ResourceNotFoundException("Airline not found with id " + aircraftDTO.getAirlineId()));
+
+        // Create a new Aircraft entity and set its properties
+        Aircraft aircraft = new Aircraft();
+        aircraft.setModel(aircraftDTO.getModel());
+        aircraft.setCapacity(aircraftDTO.getCapacity());
+        aircraft.setAirline(airline);
+
+        // Save the Aircraft entity
         Aircraft newAircraft = aircraftService.addAircraft(aircraft);
         return new ResponseEntity<>(newAircraft, HttpStatus.CREATED);
     }

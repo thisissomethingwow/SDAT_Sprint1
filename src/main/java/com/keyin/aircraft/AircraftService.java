@@ -1,5 +1,7 @@
 package com.keyin.aircraft;
 
+import com.keyin.airline.Airline;
+import com.keyin.airline.AirlineRepository;
 import com.keyin.airport.Airport;
 import com.keyin.airport.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ public class AircraftService {
     private AircraftRepository aircraftRepository;
     @Autowired
     private AirportRepository airportRepository;
+
 
     public List<Aircraft> findAllAircrafts() {
         return (List<Aircraft>) aircraftRepository.findAll();
