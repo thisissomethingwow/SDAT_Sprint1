@@ -92,4 +92,12 @@ public class PassengerService {
         }
         return null;
     }
+    public List<Flight> getFlightsByPassenger(Long passengerId) {
+        Optional<Passenger> passengerOptional = passengerRepository.findById(passengerId);
+        if (passengerOptional.isPresent()) {
+            Passenger passenger = passengerOptional.get();
+            return passenger.getFlights();  // Return the list of flights associated with the passenger
+        }
+        return Collections.emptyList();  // Return an empty list if no passenger is found
+    }
 }

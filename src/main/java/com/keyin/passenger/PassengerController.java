@@ -4,6 +4,7 @@ import com.keyin.aircraft.Aircraft;
 import com.keyin.city.City;
 import com.keyin.city.CityRepository;
 import com.keyin.city.CityServices;
+import com.keyin.flight.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,6 +76,14 @@ public class PassengerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Return 404 if no aircraft found
         }
         return new ResponseEntity<>(aircraftList, HttpStatus.OK);  // Return the list of aircraft
+    }
+    @GetMapping("/passengers/{id}/flights")
+    public ResponseEntity<List<Flight>> getFlightsByPassenger(@PathVariable Long id) {
+        List<Flight> flightList = passengerService.getFlightsByPassenger(id);
+        if (flightList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Return 404 if no flights found
+        }
+        return new ResponseEntity<>(flightList, HttpStatus.OK);  // Return the list of flights
     }
 
     // Book a flight for a passenger
