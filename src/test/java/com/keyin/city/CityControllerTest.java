@@ -19,10 +19,10 @@ public class CityControllerTest {
 
 
     @InjectMocks
-    private CityController cityController; // The controller to test
+    private CityController cityController;
 
     @Mock
-    private CityServices cityServices; // Mocking the service layer
+    private CityServices cityServices;
 
     private City city;
 
@@ -32,7 +32,6 @@ public class CityControllerTest {
         city = new City(1L, "SampleCity", "SampleProvince", 100000);
     }
 
-    // Test: Get all cities
     @Test
     void testGetAllCity() {
         List<City> cities = new ArrayList<>();
@@ -45,7 +44,6 @@ public class CityControllerTest {
         assertEquals(1, response.getBody().size());
     }
 
-    // Test: Get city by ID
     @Test
     void testGetCityById() {
         Mockito.when(cityServices.getAllCityById(anyLong())).thenReturn(city);
@@ -56,7 +54,6 @@ public class CityControllerTest {
         assertEquals(city.getName(), response.getBody().getName());
     }
 
-    // Test: Add city
     @Test
     void testAddCity() {
         Mockito.when(cityServices.addCity(any(City.class))).thenReturn(city);
@@ -68,7 +65,6 @@ public class CityControllerTest {
         assertEquals(city.getProvince(), createdCity.getProvince());
     }
 
-    // Test: Update city
     @Test
     void testDeleteCity() {
         Mockito.doNothing().when(cityServices).deleteCityById(anyLong());
