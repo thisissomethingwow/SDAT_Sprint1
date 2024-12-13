@@ -18,7 +18,7 @@ import java.util.List;
 public class FlightController {
 
     @Autowired
-    private FlightService flightService;
+    FlightService flightService;
 
     // Get all flights
     @GetMapping
