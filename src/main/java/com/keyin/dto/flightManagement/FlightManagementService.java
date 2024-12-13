@@ -13,10 +13,8 @@ import com.keyin.gate.GateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -121,6 +119,60 @@ public class FlightManagementService {
 
         } catch (Exception e) {
             throw new FlightManagementException("Error fetching reference data: " + e.getMessage());
+        }
+    }
+    public FlightManagementDTO getFlightById(Long id) {
+        Optional<Flight> flightOptional = flightRepository.findById(id);
+        if (flightOptional.isPresent()) {
+            return convertToDTO(flightOptional.get());
+        } else {
+            throw new FlightManagementException("Flight not found");
+        }
+    }
+
+    public FlightManagementDTO updateFlight(Long id, FlightManagementDTO flightDTO) {
+        validateFlightDTO(flightDTO);
+
+        Optional<Flight> flightOptional = flightRepository.findById(id);
+        if (!flightOptional.isPresent()) {
+            throw new FlightManagementException("Flight not found");
+        }
+
+        Flight flight = flightOptional.get();
+        try {
+            // Set relationships using IDs from DTO
+            Airline airline = airlineService.getAllAirlineById(flightDTO.getAirlineId());
+            Aircraft aircraft = aircraftService.getAircraftById(flightDTO.getAircraftId());
+            Airport departureAirport = airportService.getAirportById(flightDTO.getDepartureAirportId());
+            Airport arrivalAirport = airportService.getAirportById(flightDTO.getArrivalAirportId());
+            Gate departureGate = gateService.getGateById(flightDTO.getDepartureGateId());
+            Gate arrivalGate = gateService.getGateById(flightDTO.getArrivalGateId());
+
+            // Validate all entities were found
+            validateEntitiesExist(airline, aircraft, departureAirport, arrivalAirport, departureGate, arrivalGate);
+
+            // Validate gates belong to correct airports
+            validateGateAirportAssignment(departureGate, departureAirport, "Departure");
+            validateGateAirportAssignment(arrivalGate, arrivalAirport, "Arrival");
+
+            // Set all flight properties
+            flight.setAirline(airline);
+            flight.setAircraft(aircraft);
+            flight.setDepartureAirport(departureAirport);
+            flight.setArrivalAirport(arrivalAirport);
+            flight.setDepartureGate(departureGate);
+            flight.setArrivalGate(arrivalGate);
+            flight.setDepartureTime(flightDTO.getDepartureTime());
+            flight.setArrivalTime(flightDTO.getArrivalTime());
+            flight.setFlightStatus(flightDTO.getStatus());
+
+            // Save updated flight
+            Flight updatedFlight = flightRepository.save(flight);
+
+            return convertToDTO(updatedFlight);
+
+        } catch (Exception e) {
+            throw new FlightManagementException("Error updating flight: " + e.getMessage());
         }
     }
 
