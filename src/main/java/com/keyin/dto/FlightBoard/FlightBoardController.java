@@ -12,7 +12,7 @@ import java.util.List;
 public class FlightBoardController {
 
     @Autowired
-    private FlightBoardService flightBoardService;
+    public FlightBoardService flightBoardService;
 
     @GetMapping
     public ResponseEntity<List<FlightBoardDTO>> getFlightBoard() {

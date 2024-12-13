@@ -1,5 +1,8 @@
-package com.keyin.gate;
+package com.keyin.Gate;
 
+import com.keyin.gate.Gate;
+import com.keyin.gate.GateController;
+import com.keyin.gate.GateService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

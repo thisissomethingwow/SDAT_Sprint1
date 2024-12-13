@@ -2,6 +2,7 @@ package com.keyin.flight;
 
 import com.keyin.aircraft.Aircraft;
 import com.keyin.airport.Airport;
+import com.keyin.flight.FlightService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
