@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/airline")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AirlineController {
     @Autowired
     public AirlineService airlineService;

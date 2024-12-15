@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/flightboard")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class FlightBoardController {
 
     @Autowired

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/flight-management")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class FlightManagementController {
 
     @Autowired

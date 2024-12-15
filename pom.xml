@@ -14,7 +14,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -22,12 +21,6 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-<!--    <dependencies>-->
-<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <artifactId>spring-boot-starter-security</artifactId>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
-<!--    </dependencies>-->
     <dependencies>
         <!-- Existing dependencies -->
         <dependency>
@@ -82,8 +75,6 @@
             <artifactId>aws-java-sdk-secretsmanager</artifactId>
             <version>1.12.261</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -106,9 +97,15 @@
                     <tag>latest</tag>
                 </configuration>
             </plugin>
+
+            <!-- Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.keyin.RestServiceApplication</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-
-
 </project>
