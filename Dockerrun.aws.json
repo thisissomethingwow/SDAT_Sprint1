@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "mazradwan/springboot-backend:1.0.2",
+    "Name": "mazradwan/springboot-backend:1.0.3",
     "Update": "true"
   },
   "Ports": [
